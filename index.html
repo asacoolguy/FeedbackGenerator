@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>VIP Kids Feedback Generator</title>
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body onload="checkTemplate()">
+	<div class="container">
+		<h1>Feedback Generator</h1>
+		<div class="jumbotron">
+			<h3>Load Feedback Template</h3>
+			<form id="templateInputForm">	
+				<div class="form-group">
+					<div id="templateCheck"></div>
+					<input type="file" id="templateUpload">
+				</div>
+				<button type="submit" onClick="saveTemplate();"
+					class="btn btn-primary">UploadTemplate</button>
+			</form>
+			<br>
+			<h3>Add New Feedback</h3>
+			<form id="feedbackInputForm">
+				<div class="form-group">
+					<label for="feedbackInput">Student Name</label>
+					<input type="text" class="form-control" id="studentName"">
+				</div>
+				<div class="form-group">
+					<label for="feedbackInput">Lesson Number</label>
+					<select class="form-control" id="lessonNumber">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+					</select> 
+				</div>
+				<div class="form-group">
+					<label for="feedbackInput">Lesson Topic</label>
+					<input type="text" class="form-control" id="lessonTopic">
+				</div>
+			  	<button type="submit" onClick="generateFeedback(); return false;" class="btn btn-primary">Generate</button>
+			</form>
+		</div>
+	  
+		<div class="jumbotron">
+	  		<div id="generatedFeedbackBox"></div>
+		</div>
+
+	</div>
+
+	<script src="main.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</body>	
+
+</html>
