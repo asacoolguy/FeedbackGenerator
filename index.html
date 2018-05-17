@@ -12,10 +12,22 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 
-<body>
+<body onload="checkTemplate()">
 	<div class="container">
 		<h1>Feedback Generator</h1>
 		<div class="jumbotron">
+			<h3>Feedback Templates</h3>
+			<form id="templateInputForm">	
+				<div class="form-group">
+					<div id="templateCheck"></div>
+					<input type="file" id="templateUpload">
+				</div>
+				<button type="submit" onClick="saveTemplate();"
+					class="btn btn-primary">Upload Template</button>
+			</form>
+		</div>
+		<div class="jumbotron">
+			<h3>Feedback Generation</h3>
 			<form class="form-horizontal" id="feedbackInputForm">
 				<!-- Lesson Info -->
 				<label for="feedbackInput" class="input-lg col-md-12">Lesson Info</label>
@@ -86,33 +98,149 @@
 
 				<!-- Lesson Description -->
 				<label for="feedbackInput" class="input-lg col-md-12">Lesson Description</label>
+				<!-- Vocab -->
+				<label for="feedbackInput" class="input-lg col-md-12">Vocab</label>
 				<div class="form-group">
-					<label for="feedbackInput" class="col-md-2">Vocab - Success</label>
-					<div class="col-md-8">
+					<label for="feedbackInput" class="col-md-2">Success</label>
+					<div class="col-md-10">
 						<input type="text" class="form-control" id="vocabSuccess">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="feedbackInput" class="col-md-2">Vocab - Failure</label>
-					<div class="col-md-8">
+					<label for="feedbackInput" class="col-md-2">Failure</label>
+					<div class="col-md-10">
 						<input type="text" class="form-control" id="vocabFailure">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="feedbackInput" class="col-md-2">Letters - Success</label>
-					<div class="col-md-8">
+					<label for="feedbackInput" class="col-md-2">Extra Comments</label>
+					<div class="col-md-10">
+						<input type="text" class="form-control" id="vocabComments">
+					</div>
+				</div>
+				<!-- Letters -->
+				<label for="feedbackInput" class="input-lg col-md-12">Letters</label>
+				<div class="form-group">
+					<label for="feedbackInput" class="col-md-2">Success</label>
+					<div class="col-md-10">
 						<input type="text" class="form-control" id="lettersSuccess">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="feedbackInput" class="col-md-2">Letters - Failure</label>
-					<div class="col-md-8">
+					<label for="feedbackInput" class="col-md-2">Failure</label>
+					<div class="col-md-10">
 						<input type="text" class="form-control" id="lettersFailure">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="feedbackInput" class="col-md-2">Extra Comments</label>
+					<div class="col-md-10">
+						<input type="text" class="form-control" id="lettersComments">
+					</div>
+				</div>
+				<!-- Sentence Structure -->
+				<label for="feedbackInput" class="input-lg col-md-12">Sentence Structure</label>
+				<div class="form-group">
+					<label for="feedbackInput" class="col-md-2">Success</label>
+					<div class="col-md-10">
+						<input type="text" class="form-control" id="sentencesSuccess">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="feedbackInput" class="col-md-2">Failure</label>
+					<div class="col-md-10">
+						<input type="text" class="form-control" id="sentencesFailure">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="feedbackInput" class="col-md-2">Extra Comments</label>
+					<div class="col-md-10">
+						<input type="text" class="form-control" id="sentencesComments">
+					</div>
+				</div>
+				<!-- Commands -->
+				<label for="feedbackInput" class="input-lg col-md-12">Commands</label>
+				<div class="form-group">
+					<label for="feedbackInput" class="col-md-2">Success</label>
+					<div class="col-md-10">
+						<input type="text" class="form-control" id="commandsSuccess">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="feedbackInput" class="col-md-2">Failure</label>
+					<div class="col-md-10">
+						<input type="text" class="form-control" id="commandsFailure">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="feedbackInput" class="col-md-2">Extra Comments</label>
+					<div class="col-md-10">
+						<input type="text" class="form-control" id="commandsComments">
+					</div>
+				</div>
+				<!-- Phonemes -->
+				<label for="feedbackInput" class="input-lg col-md-12">Phonemes</label>
+				<div class="form-group">
+					<label for="feedbackInput" class="col-md-2">Success</label>
+					<div class="col-md-10">
+						<input type="text" class="form-control" id="phonemesSuccess">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="feedbackInput" class="col-md-2">Failure</label>
+					<div class="col-md-10">
+						<input type="text" class="form-control" id="phonemesFailure">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="feedbackInput" class="col-md-2">Extra Comments</label>
+					<div class="col-md-10">
+						<input type="text" class="form-control" id="phonemesComments">
+					</div>
+				</div>
+				<!-- Interaction -->
+				<label for="feedbackInput" class="input-lg col-md-12">Interactive Activities</label>
+				<div class="form-group">
+					<label for="feedbackInput" class="col-md-2">Success</label>
+					<div class="col-md-10">
+						<input type="text" class="form-control" id="interactionSuccess">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="feedbackInput" class="col-md-2">Failure</label>
+					<div class="col-md-10">
+						<input type="text" class="form-control" id="interactionFailure">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="feedbackInput" class="col-md-2">Extra Comments</label>
+					<div class="col-md-10">
+						<input type="text" class="form-control" id="interactionComments">
 					</div>
 				</div>
 
 				<!-- Misc -->
 				<label for="feedbackInput" class="input-lg col-md-12">Miscellaneous</label>
+				<div class="form-group">
+					<label for="feedbackInput" class="col-md-2">Unit Song</label>
+					<div class="col-md-2">
+						<select class="form-control" id="unitSong">
+							<option value="ignore">Ignore</option>
+							<option value="success">Success</option>
+							<option value="failure">Failure</option>
+						</select> 
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="feedbackInput" class="col-md-2">Other Comments</label>
+					<div class="col-md-10">
+						<input type="text" class="form-control" id="otherComments">
+					</div>
+				</div>
+
+
+				<!-- Conclusion -->
+				<label for="feedbackInput" class="input-lg col-md-12">Conclusion</label>
 				<div class="form-group">
 					<label for="feedbackInput" class="col-md-2">Parents Present</label>
 					<div class="col-md-2">

@@ -1,0 +1,211 @@
+{
+  "unitCountry": [
+    "China",
+    "country2",
+    "country3",
+    "country4",
+    "country5",
+    "country6",
+    "country7",
+    "country8",
+    "country9",
+    "country10",
+    "country11",
+    "country12"
+  ],
+  "unitCharacter": [
+    "Lee",
+    "character2",
+    "character3",
+    "character4",
+    "character5",
+    "character6",
+    "character7",
+    "character8",
+    "character9",
+    "character10",
+    "character11",
+    "character12"
+  ],
+  "opening": [
+    "It was a pleasure teaching ~name again today.",
+    "It was nice teaching ~name again today."
+  ],
+  "opening_newStudent": [
+    "It was a pleasure teaching ~name for the first time today. Thank you for choosing me to be ~pronounPos teacher.",
+    "I had a great lesson today with ~name. Thank you for giving me the opportunity to be ~pronounPos teacher."
+  ],
+  "lessonTopic_intro": [
+    "Today we learned about ~unitCountry and introduced the character ~unitCharacter.",
+    "Today we went to ~unitCountry and met the new character, ~unitCharacter."
+  ],
+  "lessonTopic_checkpoint": [
+    "~name did a great job today with the checkpoint lesson.",
+    "~name did wonderfully today with the checkpoint lesson."
+  ],
+  "lessonTopic_assessment": [
+    "~name did a great job today with ~pronounPos assessment lesson.",
+    "~name was absolutely wonderful today with ~pronounPos assessment lesson."
+  ],
+  "techProblems": [
+    "Unfortunately, we had some problems today with ~techProblems."
+  ],
+  "didNotFinish": [
+    "Unfortunately, we did not get to finish all of today's lesson."
+  ],
+  "didNotFinishBecauseTechProblems": [
+    "Because of these issues, we did not get to finish all of today's lesson."
+  ],
+  "vocabDescription": {
+    "Success": {
+      "single": [
+        "~pronounSub did a really good job with the word ~item.",
+        "~name learned to pronounce the word ~item very quickly."
+      ],
+      "multiple": [
+        "~pronounSub did a great job learning the words ~items.",
+        "~pronounSub was able to learn the words ~items very quickly."
+      ]
+    },
+    "Failure": {
+      "single": [
+        "~pronounSub could use more practice with the word ~item.",
+        "~name should keep practicing the word ~item."
+      ],
+      "multiple": [
+        "~pronounSub could use more practice with the words ~items.",
+        "~pronounSub should keep practice the words ~items."
+      ]
+    }
+  },
+  "lettersDescription": {
+    "Success": {
+      "single": [
+        "~pronounSub successfully identified the letter ~item.",
+        "~name accurately identified the letter ~item."
+      ],
+      "multiple": [
+        "~pronounSub successfully identified the letters ~items.",
+        "~pronounSub was able to identify the letters ~items very quickly."
+      ]
+    },
+    "Failure": {
+      "single": [
+        "~pronounSub could use more practice identifying the letter ~item.",
+        "~name should practice identifying the letter ~item."
+      ],
+      "multiple": [
+        "~pronounSub could use more practice identifying the letters ~items.",
+        "~pronounSub should practice identifying the letters ~items."
+      ]
+    }
+  },
+  "sentencesDescription": {
+    "Success": {
+      "single": [
+        "~pronounSub successfully used the sentence structure ~item.",
+        "~name skillfully made sentences using the structure ~item."
+      ],
+      "multiple": [
+        "~pronounSub successfully used the sentence structures ~items.",
+        "~pronounSub skillfully made sentences using the structures ~items."
+      ]
+    },
+    "Failure": {
+      "single": [
+        "~pronounSub could use more practice making sentences of the structure ~item.",
+        "~name should practice making sentences of the form ~item."
+      ],
+      "multiple": [
+        "~pronounSub could use more practice making sentences of the forms ~items.",
+        "~pronounSub should practice making ~items sentences."
+      ]
+    }
+  },
+  "commandsDescription": {
+    "Success": {
+      "single": [
+        "~pronounSub successfully followed the command ~item.",
+        "~name skillfully followed the command ~item."
+      ],
+      "multiple": [
+        "~pronounSub successfully understood and followed the commands ~items.",
+        "~pronounSub had no trouble understanding and following the commands ~items."
+      ]
+    },
+    "Failure": {
+      "single": [
+        "~pronounSub could use more practice doing the command ~item.",
+        "~name should practice following the command ~item."
+      ],
+      "multiple": [
+        "~pronounSub could use more practice with the commands ~items.",
+        "~pronounSub should practice following the commands ~items."
+      ]
+    }
+  },
+  "phonemesDescription": {
+    "Success": {
+      "single": [
+        "~pronounSub successfully pronounced the phoneme ~item.",
+        "~name quickly learned to pronounce words using the phoneme ~item."
+      ],
+      "multiple": [
+        "~pronounSub correctly pronounced the phonemes ~items.",
+        "~pronounSub did a great job saying words using the phonemes ~items."
+      ]
+    },
+    "Failure": {
+      "single": [
+        "~pronounSub could use more practice pronouncing words of the phoneme ~item.",
+        "~name should practice the phoneme ~item more."
+      ],
+      "multiple": [
+        "~pronounSub could use more practice with the phonemes ~items.",
+        "~pronounSub should practice pronouncing the phonemes ~items."
+      ]
+    }
+  },
+  "unitSongSuccess": [
+    "~name did a great job singing the unit song. ~pronounSub seems to really like it!",
+    "~name was wonderful at singing the unit song. ~pronounSub sounded really good."
+  ],
+  "unitSongFailure": [
+    "~name should practice singing the unit song more.",
+    "~name could use more practice with singing the unit song."
+  ],
+  "interactionDescription": {
+    "Success": {
+      "single": [
+        "~pronounSub did a great job with the interaction ~item.",
+        "~name correctly did the interaction ~item."
+      ],
+      "multiple": [
+        "~pronounSub correctly did the interactions ~items.",
+        "~pronounSub did a great job doing the interactions ~items."
+      ]
+    },
+    "Failure": {
+      "single": [
+        "~pronounSub could use more practice with the interaction ~item.",
+        "~name should practice the interaction ~item more."
+      ],
+      "multiple": [
+        "~pronounSub could use more practice with the interactions ~items.",
+        "~pronounSub should practice doing the interactions ~items."
+      ]
+    }
+  },
+  "thankParents": [
+    "Thank you so much ~parents, for your support during the lesson.",
+    "~parents, I really appreciate your choosing me to be your child's teacher."
+  ],
+  "selfPromo": [
+    "If you enjoyed the lesson, please consider leaving me feeback too.",
+    "Please don't forget to leave me ratings and feedbacks if you thought I did well with today's lesson."
+  ],
+  "ending": [
+  	"Thank you and hope to see you again! -Teacher Grace",
+  	"I hope to see you in class again! -Teacher Grace"
+  ]
+}
