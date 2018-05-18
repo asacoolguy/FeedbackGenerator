@@ -3,8 +3,8 @@ var tempDatabse;
 var lessonData = {};
 const categories = ["Vocab", "Letters", "Sentences", "Commands", "Phonemes", "Interactions"];
 
-document.getElementById("newStudent")
-  .addEventListener('change', generateFeedback, false);
+//document.getElementById("newStudent")
+  //.addEventListener('change', generateFeedback, false);
 
 
 // ---------------------------------------
