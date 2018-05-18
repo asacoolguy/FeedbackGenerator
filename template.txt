@@ -1,4 +1,6 @@
 {
+  "help with JSON": "use this website to edit JSON: https://jsoneditoronline.org/#/",
+  "help with CSV": "to generate a database file, save your excel file as a csv file with tab separated values. then use this site: https://www.csvjson.com/csv2json to convert 	CSV files into JSON files. finally copy the JSON file into a text file that can be used as the database file.",
   "unitCountry": [
     "China",
     "country2",
@@ -166,15 +168,7 @@
       ]
     }
   },
-  "unitSongSuccess": [
-    "~name did a great job singing the unit song. ~pronounSub seems to really like it!",
-    "~name was wonderful at singing the unit song. ~pronounSub sounded really good."
-  ],
-  "unitSongFailure": [
-    "~name should practice singing the unit song more.",
-    "~name could use more practice with singing the unit song."
-  ],
-  "interactionDescription": {
+  "interactionsDescription": {
     "Success": {
       "single": [
         "~pronounSub did a great job with the interaction ~item.",
@@ -196,6 +190,14 @@
       ]
     }
   },
+  "unitSongSuccess": [
+    "~name did a great job singing the unit song. ~pronounSub seems to really like it!",
+    "~name was wonderful at singing the unit song. ~pronounSub sounded really good."
+  ],
+  "unitSongFailure": [
+    "~name should practice singing the unit song more.",
+    "~name could use more practice with singing the unit song."
+  ],
   "thankParents": [
     "Thank you so much ~parents, for your support during the lesson.",
     "~parents, I really appreciate your choosing me to be your child's teacher."

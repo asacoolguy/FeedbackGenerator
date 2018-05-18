@@ -1,0 +1,62 @@
+[
+  {
+    "Unit": 1,
+    "Lesson": 1,
+    "Vocab": "Apple, Pear, Banana",
+    "Letters": "A, B, C",
+    "Sentences": "I like ___",
+    "Commands": "",
+    "Phonemes": "/l/ as in lantern",
+    "Interactions": "drawing, singing"
+  },
+  {
+    "Unit": 1,
+    "Lesson": 2,
+    "Vocab": "Kiwi, Watermelon",
+    "Letters": "D, E, F",
+    "Sentences": "I eat ___, I drink ____",
+    "Commands": "",
+    "Phonemes": "",
+    "Interactions": ""
+  },
+  {
+    "Unit": 1,
+    "Lesson": 3,
+    "Vocab": "Pineapple, strawberry",
+    "Letters": "G, H, I",
+    "Sentences": "",
+    "Commands": "",
+    "Phonemes": "",
+    "Interactions": ""
+  },
+  {
+    "Unit": 2,
+    "Lesson": 1,
+    "Vocab": "Train, Airplane, Junction",
+    "Letters": "J, K, L",
+    "Sentences": "",
+    "Commands": "",
+    "Phonemes": "",
+    "Interactions": ""
+  },
+  {
+    "Unit": 2,
+    "Lesson": 2,
+    "Vocab": "TV, Telephone, Remote",
+    "Letters": "M, N, O",
+    "Sentences": "",
+    "Commands": "",
+    "Phonemes": "",
+    "Interactions": ""
+  },
+  {
+    "Unit": 2,
+    "Lesson": 3,
+    "Vocab": "Xbox, PS4, Switch",
+    "Letters": "P, Q, R",
+    "Sentences": "",
+    "Commands": "",
+    "Phonemes": "",
+    "Interactions": ""
+  }
+]

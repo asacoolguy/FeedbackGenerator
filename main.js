@@ -1,20 +1,39 @@
 var tempTemplate, template;
-
-document.getElementById("templateUpload")
-  .addEventListener('change', readTemplate, false);
+var tempDatabse;
+var lessonData = {};
+const categories = ["Vocab", "Letters", "Sentences", "Commands", "Phonemes", "Interactions"];
 
 document.getElementById("newStudent")
   .addEventListener('change', generateFeedback, false);
 
 
+// ---------------------------------------
+//
+//     Upload templates and database
+//
+// ---------------------------------------
+document.getElementById("templateUpload")
+  .addEventListener('change', readTemplate, false);
+
+document.getElementById("databaseUpload")
+  .addEventListener('change', readDatabase, false);
+
+
 // checks if there's already a template in storage
-function checkTemplate(){
-  checker = document.getElementById('templateCheck');
+function checkStorage(){
+  templateChecker = document.getElementById('templateCheck');
+  databaseChecker = document.getElementById('databaseCheck');
 
   if (localStorage.getItem('template') === null){
-    checker.innerHTML = "<h4>No template detected. Please upload a template.</h4>";
+    templateChecker.innerHTML = "<h4>No template detected. Please upload a template.</h4>";
   } else{
-    checker.innerHTML = "<h4>Template found</h4>";
+    templateChecker.innerHTML = "<h4>Template found</h4>";
+  }
+
+  if (localStorage.getItem('database') === null){
+    databaseChecker.innerHTML = "<h4>No database detected. Please upload a lesson database.</h4>";
+  } else{
+    databaseChecker.innerHTML = "<h4>Lesson database found</h4>";
   }
 }
 
@@ -39,79 +58,116 @@ function readTemplate(event){
   reader.readAsText(file);
 }
 
+// reads the uploaded template 
+function readDatabase(event){
+  // Check for the various File API support
+  if (!(window.File && window.FileReader && window.FileList && window.Blob)) {
+    alert('The File APIs are not fully supported in this browser.');
+    return;
+  } 
+
+  let file = event.target.files[0];
+  let reader = new FileReader();
+
+  reader.onload = (function(fileInput) {
+    return function(eventInput){
+      tempDatabse = eventInput.target.result;
+    };
+  })(file);
+
+  reader.readAsText(file);
+}
+
 
 // saves the uploaded template into local storage
 function saveTemplate(){
   localStorage.setItem('template', tempTemplate);
-  checkTemplate();
+}
+
+// saves the uploaded database into local storage
+function saveDatabase(){
+  localStorage.setItem('database', tempDatabse);
 }
 
 
-// get feedback inputs from the form and store into an object
-function getFeedbackInputs(){
-  let inputs = {}
-  // lesson info
-  inputs.unit = document.getElementById('unit').value;
-  inputs.lesson = document.getElementById('lesson').value;
 
-  // student info
-  inputs.studentName = document.getElementById('name').value;
-  inputs.studentGender = document.getElementById('gender').value;
-  inputs.newStudent = document.getElementById('newStudent').checked;
-  inputs.pronounSub = "he";
-  inputs.pronounObj = "him";
-  inputs.pronounPos = "his";
-  if (gender == "girl"){
-    inputs.pronounSub = "she";
-    inputs.pronounObj = inputs.pronounPos = "her";
+// ---------------------------------------
+//
+//     Update the form dynamically
+//
+// ---------------------------------------
+document.getElementById("techProblems")
+  .addEventListener('change', displayTechProblemBox, false);
+
+document.getElementById("unit")
+  .addEventListener('change', displayLessonDescriptionBox, false);
+
+document.getElementById("lesson")
+  .addEventListener('change', displayLessonDescriptionBox, false);
+
+
+// display the tech problem box
+function displayTechProblemBox(){
+  let box = document.getElementById('techProblemsBox');
+  if (box.style.display === "none"){
+    box.style.display = "block";
+  } else{
+    box.style.display = "none";
+  }
+}
+
+
+// fetch data from the database and display in lesson description
+function displayLessonDescriptionBox(){
+  let unit = document.getElementById('unit').value;
+  let lesson = document.getElementById('lesson').value;
+
+  if (unit == "" || lesson == ""){
+    return;
   }
 
-  // technical difficulties
-  inputs.problemAudio = document.getElementById('problemAudio').checked;
-  inputs.problemVideo = document.getElementById('problemVideo').checked;
-  inputs.problemInternet = document.getElementById('problemInternet').checked;
-  inputs.problemTime = document.getElementById('problemTime').checked;
-  inputs.problemOther = document.getElementById('problemOtherCheckbox').checked;
-  inputs.problemOtherText = document.getElementById('problemOtherText').value;
-  
-  // lesson descriptions
-  inputs.vocabSuccess = document.getElementById('vocabSuccess').value;
-  inputs.vocabFailure = document.getElementById('vocabFailure').value;
-  inputs.vocabComments = document.getElementById('vocabComments').value;
-  inputs.lettersSuccess = document.getElementById('lettersSuccess').value;
-  inputs.lettersFailure = document.getElementById('lettersFailure').value;
-  inputs.lettersComments = document.getElementById('lettersComments').value;
-  inputs.sentencesSuccess = document.getElementById('sentencesSuccess').value;
-  inputs.sentencesFailure = document.getElementById('sentencesFailure').value;
-  inputs.sentencesComments = document.getElementById('sentencesComments').value;
-  inputs.commandsSuccess = document.getElementById('commandsSuccess').value;
-  inputs.commandsFailure = document.getElementById('commandsFailure').value;
-  inputs.commandsComments = document.getElementById('commandsComments').value;
-  inputs.phonemesSuccess = document.getElementById('phonemesSuccess').value;
-  inputs.phonemesFailure = document.getElementById('phonemesFailure').value;
-  inputs.phonemesComments = document.getElementById('phonemesComments').value;
-  inputs.interactionSuccess = document.getElementById('interactionSuccess').value;
-  inputs.interactionFailure = document.getElementById('interactionFailure').value;
-  inputs.interactionComments = document.getElementById('interactionComments').value;
+  lessonData = getLessonData(unit, lesson);
+  for (let i = 0; i < categories.length; i++){
+    let array = lessonData[categories[i]];
+    let finalHTML = "";
 
-  // misc
-  inputs.unitSong = document.getElementById('unitSong').value;
-  inputs.otherComments = document.getElementById('otherComments').value;
+    if (array[0] != ""){
+      // category label
+      finalHTML += "<label for=\"feedbackInput\" class=\"col-md-2\">" + 
+        categories[i] + "</label>"
+      // checkboxes
+      finalHTML += "<div class=\"form-group\">";
 
-  // conclusion
-  inputs.parents = document.getElementById('parents').value;
-  inputs.extraComment = document.getElementById('extraComment').value;
+      for (let j = 0; j < array.length; j++){
+        let checkboxID = categories[i] + "Checkbox" + j;
+        finalHTML += "<div class=\"col-md-2\">";
+        finalHTML += "<input type=\"checkbox\" class=\"col-md-1\" id=\"" + 
+          checkboxID + "\" value=\"" + array[j] + "\"> " + array[j] + "</div>";
+      }
 
-  return inputs;
+      finalHTML += "</div>";
+    }
+
+    document.getElementById(categories[i] + "Box").innerHTML = finalHTML;
+  }
 }
 
 
+// ---------------------------------------
+//
+//    Generate feedback
+//
+// ---------------------------------------
 
 // reads the form and generates feedback
 function generateFeedback(){
-  // quit if no template stored
+  // quit if no template or database stored
   if (localStorage.getItem('template') === null){
     alert("Error: no template found");
+    return;
+  } 
+  if (localStorage.getItem('database') === null){
+    alert("Error: no lesson database found");
     return;
   } 
 
@@ -120,7 +176,20 @@ function generateFeedback(){
   let generatedFeedbackBox = document.getElementById('generatedFeedbackBox');
   let inputs = getFeedbackInputs();
   let feedback = "";
-  let randomNumber = 0;
+
+  // check for valid input
+  if (inputs.unit == "" || inputs.lesson == "" || inputs.studentName == ""){
+    alert("Error: please enter a valid unit, lesson and name");
+    return;
+  }
+
+  // make sure there is a lessonData
+  if (lessonData === null){
+    alert("Error: no matching lesson found in database for unit " + inputs.unit + 
+      ", lesson " + inputs.lesson);
+    return;
+  }
+
 
   // -----------------------------
   //     assemble the feedback 
@@ -146,44 +215,47 @@ function generateFeedback(){
   feedback += topicSentence;
 
   // --- technical difficulties and other issues ---
-  let techProblems = [];
-  if (inputs.problemAudio == true) techProblems.push("the audio");
-  if (inputs.problemVideo == true) techProblems.push("the video");
-  if (inputs.problemInternet == true) techProblems.push("the internet speed");
+  if (inputs.techProblems == true){
+    let techProblems = [];
+    if (inputs.problemAudio == true) techProblems.push("the audio");
+    if (inputs.problemVideo == true) techProblems.push("the video");
+    if (inputs.problemInternet == true) techProblems.push("the internet speed");
 
-  if (techProblems.length > 0){
-    let techProbPhrase = "";
-    if (techProblems.length == 1){
-      techProbPhrase = techProblems[0];
-    } else if (techProblems.length == 2){
-      techProbPhrase = techProblems[0] + " and " + techProblems[1];
-    } else{
-      techProbPhrase = techProblems[0] + ". " + techProblems[1] + ", and " +
-        techProblems[2];
+    if (techProblems.length > 0){
+      let techProbPhrase = "";
+      if (techProblems.length == 1){
+        techProbPhrase = techProblems[0];
+      } else if (techProblems.length == 2){
+        techProbPhrase = techProblems[0] + " and " + techProblems[1];
+      } else{
+        techProbPhrase = techProblems[0] + ". " + techProblems[1] + ", and " +
+          techProblems[2];
+      }
+      feedback += getSentence("techProblems")
+        .replace(/~techProblems/g, techProbPhrase);
     }
-    feedback += getSentence("techProblems")
-      .replace(/~techProblems/g, techProbPhrase);
-  }
 
-  if (inputs.problemTime == true){
-    if(techProblems.length > 0){
-      feedback += getSentence("didNotFinishBecauseTechProblems");
-    } else{
-      feedback += getSentence("didNotFinish");
+    if (inputs.problemTime == true){
+      if(techProblems.length > 0){
+        feedback += getSentence("didNotFinishBecauseTechProblems");
+      } else{
+        feedback += getSentence("didNotFinish");
+      }
+    }
+
+    if (inputs.problemOther == true && inputs.problemOther != ""){
+      feedback += inputs.problemOtherText;
     }
   }
 
-  if (inputs.problemOther == true && inputs.problemOther != ""){
-    feedback += inputs.problemOtherText;
-  }
 
   // --- lesson description ---
-  feedback += getLessonDescription("vocab", inputs);
-  feedback += getLessonDescription("letters", inputs);
-  feedback += getLessonDescription("sentences", inputs);
-  feedback += getLessonDescription("commands", inputs);
-  feedback += getLessonDescription("phonemes", inputs);
-  feedback += getLessonDescription("interaction", inputs);
+  for (let i = 0; i < categories.length; i++){
+    if (lessonData[categories[i]].length > 0 &&
+        lessonData[categories[i]][0] != ""){
+      feedback += getLessonDescription(categories[i]);
+    }
+  }
   
   // --- misc ---
   if (inputs.unitSong == "success"){
@@ -195,14 +267,15 @@ function generateFeedback(){
 
   // --- conclusion ---
   // thank parents
-  feedback += getSentence("thankParents")
-    .replace(/~parents/g, inputs.parents);
-
+  if (inputs.parents != "ignore"){
+    feedback += getSentence("thankParents")
+      .replace(/~parents/g, inputs.parents);
+  }
   // seld promo
   feedback += getSentence("selfPromo");
 
   // extra comments
-  if (inputs.extraComment != "") feedback += inputs.extraComment;
+  if (inputs.finalComments != "") feedback += inputs.finalComments;
 
   // conclusion
   feedback += getSentence("ending");
@@ -215,6 +288,72 @@ function generateFeedback(){
 
   // show the feedback
   generatedFeedbackBox.innerHTML = "<p>" + feedback + "</p>";
+}
+
+
+// get feedback inputs from the form and store into an object
+function getFeedbackInputs(){
+  let inputs = {}
+  // lesson info
+  inputs.unit = document.getElementById('unit').value;
+  inputs.lesson = document.getElementById('lesson').value;
+
+  // student info
+  inputs.studentName = document.getElementById('name').value;
+  inputs.studentGender = document.getElementById('gender').value;
+  inputs.newStudent = document.getElementById('newStudent').checked;
+  inputs.pronounSub = "he";
+  inputs.pronounObj = "him";
+  inputs.pronounPos = "his";
+  if (inputs.studentGender == "girl"){
+    inputs.pronounSub = "she";
+    inputs.pronounObj = inputs.pronounPos = "her";
+  }
+
+  // technical difficulties
+  inputs.techProblems = document.getElementById('techProblems').checked;
+  inputs.problemAudio = document.getElementById('problemAudio').checked;
+  inputs.problemVideo = document.getElementById('problemVideo').checked;
+  inputs.problemInternet = document.getElementById('problemInternet').checked;
+  inputs.problemTime = document.getElementById('problemTime').checked;
+  inputs.problemOther = document.getElementById('problemOtherCheckbox').checked;
+  inputs.problemOtherText = document.getElementById('problemOtherText').value;
+
+  // misc
+  inputs.unitSong = document.getElementById('unitSong').value;
+  inputs.otherComments = document.getElementById('otherComments').value;
+
+  // conclusion
+  inputs.parents = document.getElementById('parents').value;
+  inputs.finalComments = document.getElementById('finalComments').value;
+
+  return inputs;
+}
+
+
+
+// gets the lesson data based on the input
+function getLessonData(unit, lesson){
+  let database = JSON.parse(localStorage.getItem('database'));
+
+  let targetLesson = {};
+  for (let i = 0; i < database.length; i++){
+    if (database[i].Unit == unit && database[i].Lesson == lesson){
+      targetLesson = database[i];
+    }
+  }
+  if (targetLesson === null){
+    return null;
+  }
+
+  lessonData = {};
+
+  for (let i = 0; i < categories.length; i++){
+    let dataString = targetLesson[categories[i]];
+    lessonData[categories[i]] = dataString.split(',');
+  }
+
+  return lessonData;
 }
 
 
@@ -233,37 +372,44 @@ function getLessonDescSentence(topic, successful, singular){
 
 
 // makes a lesson description sentence
-function getLessonDescription(topic, inputs){
-  return getLessonDescriptionHelper(topic, "Success", inputs) +
-   " " + getLessonDescriptionHelper(topic, "Failure", inputs) +
-   " " + inputs[topic + "Comments"];
+function getLessonDescription(topic){
+  let successArray = [];
+  let failureArray = [];
+  for (let i = 0; i < lessonData[topic].length; i++){
+    let checkbox = document.getElementById(topic + "Checkbox" + i);
+    if (checkbox.checked){
+      failureArray.push(checkbox.value);
+    } else{
+      successArray.push(checkbox.value);
+    }
+  }
+
+
+  return getLessonDescriptionHelper(topic.toLowerCase(), "Success", successArray) +
+    getLessonDescriptionHelper(topic.toLowerCase(), "Failure", failureArray);
 }
 
 // makes a lesson description sentence for the given successful state
-function getLessonDescriptionHelper(topic, successful, inputs){
+function getLessonDescriptionHelper(topic, successful, array){
   let sentence = "";
   let target = topic + successful;
 
-  if (inputs[target] != ""){
-    let array = inputs[target].split(",");
-    
-    if (array.length == 1){
-      sentence = getLessonDescSentence(topic, successful, "single")
-        .replace(/~item/g, array[0]);
+  if (array.length == 1){
+    sentence = getLessonDescSentence(topic, successful, "single")
+      .replace(/~item/g, array[0]);
+  } else if (array.length > 1){
+    let words = "";
+    if (array.length == 2){
+      words = array[0] + " and " + array[1];
     } else{
-      let words = "";
-      if (array.length == 2){
-        words = array[0] + " and " + array[1];
-      } else{
-        for (let i = 0; i < array.length - 1; i++){
-          words += array[i] + ", ";
-        }
-        words += "and " + array[array.length - 1];
+      for (let i = 0; i < array.length - 1; i++){
+        words += array[i] + ", ";
       }
-
-      sentence = getLessonDescSentence(topic, successful, "multiple")
-        .replace(/~items/g, words);
+      words += "and " + array[array.length - 1];
     }
+
+    sentence = getLessonDescSentence(topic, successful, "multiple")
+      .replace(/~items/g, words);
   }
 
   return sentence;
@@ -295,9 +441,10 @@ function makeUpperCase(feedback){
     let trimmedSentence = sentences[i].trim();
     let firstChar = trimmedSentence.charAt(0).toUpperCase();
     let punctuation = feedback.substr(currentIndex + feedback.substr(currentIndex).search(/[.!?]+/), 1);
+    
     result += firstChar + trimmedSentence.substr(1) + punctuation + " ";
 
-    currentIndex += sentences[i].length;
+    currentIndex += sentences[i].length + 1;
   }
 
   return result;
