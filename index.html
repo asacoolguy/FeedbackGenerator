@@ -12,21 +12,10 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 
-<body onload="checkStorage(); displayLessonDescriptionBox();">
+<body onload="checkStorage();">
 	<div class="container">
 		<h1>Feedback Generator</h1>
 		<div class="jumbotron col-md-12">
-			<div class="col-md-6">
-				<h3>Feedback Templates</h3>
-				<form id="templateInputForm">	
-					<div class="form-group">
-						<div id="templateCheck"></div>
-						<input type="file" id="templateUpload">
-					</div>
-					<button type="submit" onClick="saveTemplate();"
-						class="btn btn-primary">Upload Template</button>
-				</form>
-			</div>
 			<div class="col-md-6">
 				<h3>Lesson Database</h3>
 				<form id="templateInputForm">	
@@ -100,94 +89,7 @@
 							</select> 
 						</div>
 					</div>
-					<div class="form-group col-md-12">
-						<input type="checkbox" class="col-md-1" id="newStudent" value=""> 
-							New Student
-					</div>
 				</div>
-				
-
-				<!-- Technical difficulties -->
-				<label for="feedbackInput" class="input-lg col-md-12">Technical Problems</label>
-				<div class="form-group col-md-12">
-					<input type="checkbox" class="col-md-1" id="techProblems" value=""> 
-						Yes, there were tech problems
-				</div>
-				<div id="techProblemsBox" style="display: none">
-					<div class="form-group col-md-12">
-					<input type="checkbox" class="col-md-1" id="problemAudio" value=""> 
-						Audio
-					</div>
-					<div class="form-group col-md-12">
-						<input type="checkbox" class="col-md-1" id="problemVideo" value=""> 
-							Video
-					</div>
-					<div class="form-group col-md-12">
-						<input type="checkbox" class="col-md-1" id="problemInternet" value="">
-							Internet Speed
-					</div>
-					<div class="form-group col-md-12">
-						<input type="checkbox" class="col-md-1" id="problemTime" value=""> 
-							Ran Out of Time	
-					</div>
-					<div class="form-group col-md-12">
-						<input type="checkbox" class="col-md-1" id="problemOtherCheckbox" 
-						value="">
-						<div class="col-md-8">
-							<input type="text" class="form-control" id="problemOtherText" 
-								placeholder="other issues">
-						</div>	
-					</div>
-				</div>
-
-				<!-- Lesson Description -->
-				<label for="feedbackInput" class="input-lg col-md-3">Lesson Description</label>
-				<label for="feedbackInput" class="input-sm col-md-12">*check the ones that the student need practice on*</label>
-				<div id="VocabBox"></div>
-				<div id="LettersBox"></div>
-				<div id="SentencesBox"></div>
-				<div id="CommandsBox"></div>
-				<div id="PhonemesBox"></div>
-				<div id="InteractionsBox"></div>
-				<div id="UnitSongBox">
-					<label for="feedbackInput" class="col-md-2">Unit Song</label>
-					<div class="form-group col-md-4">
-						<select class="form-control" id="unitSong">
-							<option value="ignore">Don't mention</option>
-							<option value="success">Did a great job</option>
-							<option value="failure">Could use practice</option>
-						</select> 
-					</div>
-				</div>
-				<div id="OtherCommentsBox" class="form-group col-md-12">
-					<label for="feedbackInput" class="col-md-2">Other Comments</label>
-					<div class="form-group col-md-10">
-						<textarea class="form-control" id="otherComments" rows="3"></textarea>
-					</div>
-				</div>
-
-
-				<!-- Conclusion -->
-				<label for="feedbackInput" class="input-lg col-md-12">Conclusion</label>
-				<div class="form-group">
-					<label for="feedbackInput" class="col-md-2">Parents to Thank</label>
-					<div class="col-md-4">
-						<select class="form-control" id="parents">
-							<option value="ignore">Don't thank parents</option>
-							<option value="dad">Dad</option>
-							<option value="mom">Mom</option>
-							<option value="parents">Both Parents</option>
-						</select> 
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="feedbackInput" class="col-md-2">Final Comments</label>
-					<div class="col-md-10">
-						<textarea class="form-control" id="finalComments" rows="3"></textarea>
-					</div>
-				</div>
-
-
 			  	<button type="submit" onClick="generateFeedback(); return false;" 
 			  		class="btn btn-primary">Generate</button>
 			</form>
