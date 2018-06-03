@@ -84,9 +84,28 @@ function saveTemplate(){
   localStorage.setItem('template', tempTemplate);
 }
 
+
 // saves the uploaded database into local storage
 function saveDatabase(){
   localStorage.setItem('database', tempDatabse);
+}
+
+
+// show the help message box
+function toggleHelpMsg(){
+  let helpMsgBox = document.getElementById("helpMsgBox");
+  if (helpMsgBox.innerHTML.toString().trim() == ""){
+    helpMsgBox.innerHTML = "<br>Templates are .txt files containing the sentences you use to populate your feedback."
+    + "<br>It needs to be in JSON format, so use <a href=\"https://jsoneditoronline.org/\" target=\"_blank\">this website</a> to edit the template file." 
+    + "<br>Sentences are divided into categories like \"opening\" and \"lessonTopic_intro\". Each sentence category can have as many sentences as you want so your generated paragraphs sound more randomized."
+    + "<br>Remember to use keywords like \"~name\", \"~pronounSub\", \"~pronounObj\", \"~pronounPos\", \"~parent\", \"~item\", and \"~items\"."
+    + "<br><br>Databases are .txt files containing the topics for each unit and lesson."
+    + "<br>After editing the entries in an excel file, save it as a csv file with tab as field delimiters. Open the csv file with a text editor and copy the contents into <a href=\"https://www.csvjson.com/csv2json\" target=\"_blank\">this website</a> and convert it to JSON format. Finally copy the JSON data back into a .txt file and it can be uploaded as a database.";
+    document.getElementById("helpMsgBtn").textContent = "Hide Template Tutorial";
+  } else{
+    helpMsgBox.innerHTML = "";
+    document.getElementById("helpMsgBtn").textContent = "Show Template Tutorial";
+  }
 }
 
 
@@ -151,6 +170,7 @@ function displayLessonDescriptionBox(){
     document.getElementById(categories[i] + "Box").innerHTML = finalHTML;
   }
 }
+
 
 
 // ---------------------------------------
@@ -423,8 +443,8 @@ function replaceWords(feedback, inputs){
   result = result.replace(/~pronounSub/g, inputs.pronounSub);
   result = result.replace(/~pronounPos/g, inputs.pronounPos);
   result = result.replace(/~pronounSub/g, inputs.pronounSub);
-  result = result.replace(/~unitCountry/g, template.unitCountry[inputs.unit]);
-  result = result.replace(/~unitCharacter/g, template.unitCharacter[inputs.unit]);
+  result = result.replace(/~unitCountry/g, template.unitCountry[inputs.unit - 1]);
+  result = result.replace(/~unitCharacter/g, template.unitCharacter[inputs.unit - 1]);
 
   return result;
 }

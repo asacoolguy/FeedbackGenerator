@@ -1,6 +1,4 @@
 {
-  "help with JSON": "use this website to edit JSON: https://jsoneditoronline.org/#/",
-  "help with CSV": "to generate a database file, save your excel file as a csv file with tab separated values. then use this site: https://www.csvjson.com/csv2json to convert 	CSV files into JSON files. finally copy the JSON file into a text file that can be used as the database file.",
   "unitCountry": [
     "China",
     "country2",
